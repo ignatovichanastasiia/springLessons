@@ -1,10 +1,10 @@
 package servlets;
 
 import classes.Product;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +19,9 @@ public class FirstServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Random rn = new Random();
         logger.info("Log: GET");
-        resp.setContentType("html/text");
+
         for(int i = 0;i<10;i++){
-            resp.getWriter().println("<html><body><p>"+(new Product(String.valueOf(i), (rn.nextInt(10)*1000))).toString()+"</p></body></html>");
+            resp.getWriter().println("<html><body><p>"+(new Product(String.valueOf(i), ((rn.nextInt(10)+1)*1000))).toString()+"</p></body></html>");
         }
     }
 
@@ -34,14 +34,14 @@ public class FirstServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        super.destroy();
+
         logger.info("log: DESTROY");
 
     }
 
     @Override
     public void init() throws ServletException {
-        super.init();
+
         logger.info("log: INIT");
     }
 }

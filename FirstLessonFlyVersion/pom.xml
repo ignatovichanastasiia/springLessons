@@ -11,7 +11,7 @@
 
   <name>FirstLesson Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://localhost:8080/firstservlet/</url>
+  <url>http://localhost:8080/lesson01/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,11 +23,12 @@
 
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>5.0.0</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1-b05</version>
       <scope>provided</scope>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
     <dependency>
@@ -52,34 +53,9 @@
   </dependencies>
 
   <build>
-    <finalName>firstlesson</finalName>
+    <finalName>lesson01</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <plugin>
-          <groupId>org.wildfly.plugins</groupId>
-          <artifactId>wildfly-maven-plugin</artifactId>
-          <version>2.0.1.Final</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plagins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.2.0</version>
-          <!--          <executions>-->
-          <!--            <execution>-->
-          <!--              <id>copy-dependencies</id>-->
-          <!--              <phase>prepare-package</phase>-->
-          <!--              <goals>-->
-          <!--                <goal>copy-dependencies</goal>-->
-          <!--              </goals>-->
-          <!--              <configuration>-->
-          <!--                <outputDirectory>${project.build.directory}/lib</outputDirectory>-->
-          <!--                <overWriteRelease>false</overWriteRelease>-->
-          <!--                <overWriteSnapshot>false</overWriteSnapshot>-->
-          <!--                <overWriteNewer>true</overWriteNewer>-->
-          <!--              </configuration>-->
-          <!--            </execution>-->
-          <!--          </executions>-->
-        </plugin>
 
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
