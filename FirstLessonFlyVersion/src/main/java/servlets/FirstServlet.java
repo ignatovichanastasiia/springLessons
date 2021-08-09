@@ -21,7 +21,7 @@ public class FirstServlet extends HttpServlet {
         logger.info("Log: GET");
 
         for(int i = 0;i<10;i++){
-            resp.getWriter().println("<html><body><p>"+(new Product(String.valueOf(i), ((rn.nextInt(10)+1)*1000))).toString()+"</p></body></html>");
+            resp.getWriter().println("<html><body><p>"+(new Product(i, String.valueOf(i), ((rn.nextInt(10)+1)*1000))).toString()+"</p></body></html>");
         }
     }
 
