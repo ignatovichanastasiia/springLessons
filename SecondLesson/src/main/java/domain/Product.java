@@ -1,21 +1,21 @@
 package domain;
 
 public class Product {
-    private String id;
+    private long id;
     private String title;
-    private double cost;
+    private int cost;
 
-    public Product(String id, String title, double cost) {
+    public Product(long id, String title, int cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -27,20 +27,22 @@ public class Product {
         this.title = title;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", cost=" + cost +
-                '}';
+        return "Product: " +
+                "id: " + id +
+                ", title: '" + title + '\'' +
+                ", cost: " + cost +
+                '\n';
     }
 }
+
+
