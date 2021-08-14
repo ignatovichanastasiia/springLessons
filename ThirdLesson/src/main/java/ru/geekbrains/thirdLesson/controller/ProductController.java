@@ -28,7 +28,9 @@ public class ProductController {
     public String getProducts(Model model) {
         ArrayList list = new ArrayList();
         Map getProducts = productService.getProducts();
-        getProducts.values().stream().forEach(x -> {list.add(x);});
+        getProducts.values().stream().forEach(x -> {
+            list.add(x);
+        });
         model.addAttribute("products", list);
         return "products";
     }
@@ -36,12 +38,10 @@ public class ProductController {
     @GetMapping("/products/{id}")
     @ResponseBody
     public String getProductInfo(Model model, @PathVariable long id) {
-        if (productService.isId(id)) {
+        if (productService.findById(id).isPresent()) {
             Product product = productService.findById(id).get();
-            if (product != null) {
-                model.addAttribute("product", product);
-                return "product_info";
-            }
+            model.addAttribute("product", product);
+            return "product_info";
         }
         return "redirect:/exception";
     }
@@ -62,7 +62,7 @@ public class ProductController {
     @PostMapping("/products/add_product")
     @ResponseBody
     public String addProduct(@ModelAttribute Product product, Model model) {
-        if (productService.add(product.getId(),product)) {
+        if (productService.add(product.getId(), product)) {
             return "redirect:/products";
         }
         return "redirect:/exception";
