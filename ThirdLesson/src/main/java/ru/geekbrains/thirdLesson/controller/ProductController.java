@@ -70,6 +70,6 @@ public class ProductController {
 
 //    @GetMapping("/test")
 //    public String test(){
-//        return "exception";
+//        return "test";
 //    }
 }
