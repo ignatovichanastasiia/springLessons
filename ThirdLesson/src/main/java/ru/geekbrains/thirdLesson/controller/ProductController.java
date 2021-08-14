@@ -10,25 +10,26 @@ import ru.geekbrains.thirdLesson.service.ProductService;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.stream.Collector;
+
 
 @Controller
 @AllArgsConstructor
+//@RequestMapping("/")
 public class ProductController {
 
-// не работает и в конструкторе, и в поле
+// не работает ни в конструкторе, ни в поле, но и без подключения работает на указанном порту
 // @Value ("${server.port}")
 // private int port;
 
     private ProductService productService;
 
     @GetMapping("/products")
-//    @ResponseBody
+    @ResponseBody
     public String getProducts(Model model) {
-//        ArrayList list = new ArrayList();
-//        Map getProducts = productService.getProducts();
-//        getProducts.values().stream().forEach(x -> {list.add(x);});
-//        model.addAttribute("products", list);
+        ArrayList list = new ArrayList();
+        Map getProducts = productService.getProducts();
+        getProducts.values().stream().forEach(x -> {list.add(x);});
+        model.addAttribute("products", list);
         return "products";
     }
 
@@ -51,7 +52,7 @@ public class ProductController {
         return "form_add";
     }
 
-    @GetMapping("/exception}")
+    @GetMapping("exception")
     @ResponseBody
     public String getExceptionPage(Model model) {
 //        model.addAttribute("someTestProd", new Product(1l,"Title",20000));
@@ -67,6 +68,8 @@ public class ProductController {
         return "redirect:/exception";
     }
 
-
-
+//    @GetMapping("/test")
+//    public String test(){
+//        return "exception";
+//    }
 }
