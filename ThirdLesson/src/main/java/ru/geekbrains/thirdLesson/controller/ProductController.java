@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +18,16 @@ public class ProductController {
 
     private ProductService productService;
 
+    //работает
     @GetMapping("/products")
-    @ResponseBody
     public String getProducts(Model model) {
         HashMap getProducts = productService.getProducts();
-        model.addAttribute("products", getProducts);
+        ArrayList products = new ArrayList(productService.getProducts().values());
+        model.addAttribute("products", products);
         return "products";
     }
 
+    //работает
     @GetMapping("/products/{id}")
     public String getProductInfo(Model model, @PathVariable Long id) {
         if (productService.findById(id).isPresent()) {

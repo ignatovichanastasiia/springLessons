@@ -11,7 +11,6 @@ import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.SpringMvcDemoApplicationTest;
 import ru.geekbrains.thirdLesson.service.ProductService;
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -45,7 +44,7 @@ class ProductControllerTest extends SpringMvcDemoApplicationTest {
 
     @Test
     void getProductInfo() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/1L"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/product_info"))
                 .andExpect(model().attribute("product", product));

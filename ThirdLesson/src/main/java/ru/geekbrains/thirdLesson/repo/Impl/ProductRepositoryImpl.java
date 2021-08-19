@@ -17,9 +17,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     private void init(){
         Random rn = new Random();
         productMap = new HashMap<>();
-        for(int i=1;i<6;i++){
-            productMap.put((1L+i),new Product((1L+i),("title"+String.valueOf(i)),(rn.nextInt(10)*1000)));
+        for(int i=0;i<6;i++){
+            productMap.put((1L+i),new Product((1L+i),("title"+String.valueOf(i+1)),(rn.nextInt(10)*1000)));
         }
+        //продуктМэп создан, продукты есть.
+        System.out.println(productMap);
     }
 
     @Override
