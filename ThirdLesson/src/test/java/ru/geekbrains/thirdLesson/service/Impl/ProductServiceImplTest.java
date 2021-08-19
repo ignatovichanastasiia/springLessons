@@ -3,6 +3,7 @@ package ru.geekbrains.thirdLesson.service.Impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +21,24 @@ class ProductServiceImplTest extends SpringMvcDemoApplicationTest {
 
     @MockBean
     ProductServiceImpl productService;
-//    @MockBean
-//    ProductRepositoryImpl productRepository;
+    @MockBean
+    ProductRepositoryImpl productRepository;
 
-    Map<Long, Product> productMapTest;
-    Map<Long, Product> productMap;
     Product product;
     Product product1;
     Product product2;
 
+    @MockBean
+    Map<Long, Product> productMapTest;
+    Map<Long, Product> productMap;
 
-    @BeforeAll
-    static void setUp() {
+
+
+    @BeforeEach
+    void setUp() {
 
         Product product = new Product(1l,"title",20000);
         Product product1 = new Product(2L,"title", 30000);
-        Map<Long,Product> productMapTest = new HashMap();
-
-
     }
 
     @Test
