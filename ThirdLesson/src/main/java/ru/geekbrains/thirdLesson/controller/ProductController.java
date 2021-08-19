@@ -15,10 +15,6 @@ import java.util.Map;
 //@RequestMapping("/")
 public class ProductController {
 
-// не работает ни в конструкторе, ни в поле, но и без подключения работает на указанном порту
-// @Value ("${server.port}")
-// private int port;
-
     private ProductService productService;
 
     @GetMapping("/products")
@@ -41,20 +37,17 @@ public class ProductController {
     }
 
     @GetMapping("/products/form")
-    @ResponseBody
     public String getProductForm(Model model) {
         return "form_add";
     }
 
     @GetMapping("exception")
-    @ResponseBody
     public String getExceptionPage(Model model) {
 //        model.addAttribute("someTestProd", new Product(1l,"Title",20000));
         return "exception";
     }
 
     @PostMapping("/products/add_product")
-    @ResponseBody
     public String addProduct(@ModelAttribute Product product, Model model) {
         if (productService.add(product.getId(), product)) {
             return "redirect:/products";

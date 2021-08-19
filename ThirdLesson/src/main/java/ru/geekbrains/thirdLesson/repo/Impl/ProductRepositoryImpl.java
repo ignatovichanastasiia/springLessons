@@ -63,7 +63,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public boolean removeByID(long id) {
         if(isId(id)){
-            return productMap.values().removeIf(product -> (product.getId()==id));
+            productMap.remove(id);
+            return true;
         }
         return false;
     }
