@@ -1,6 +1,7 @@
 package ru.geekbrains.thirdLesson.repo.Impl;
 
 
+import lombok.Data;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.repo.ProductRepository;
@@ -9,6 +10,7 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Repository
+@Data
 public class ProductRepositoryImpl implements ProductRepository {
 
     private HashMap<Long, Product> productMap;
