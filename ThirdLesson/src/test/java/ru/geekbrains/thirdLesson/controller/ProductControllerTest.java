@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.geekbrains.thirdLesson.domein.Product;
-import ru.geekbrains.thirdLesson.test_class.SpringMvcDemoApplicationTest;
+import ru.geekbrains.thirdLesson.SpringMvcDemoApplicationTest;
 import ru.geekbrains.thirdLesson.service.ProductService;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ class ProductControllerTest extends SpringMvcDemoApplicationTest {
     @MockBean
     private ProductService productService;
 
-    private Map<Long,Product> map;
+    private HashMap<Long,Product> map;
     private Product product;
 
     @BeforeEach

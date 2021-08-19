@@ -11,19 +11,19 @@ import java.util.*;
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private Map<Long, Product> productMap;
+    private HashMap<Long, Product> productMap;
 
     @PostConstruct
     private void init(){
         Random rn = new Random();
         productMap = new HashMap<>();
         for(int i=1;i<6;i++){
-            productMap.put((long)(1000+i),new Product((long)(1000+i),("title"+String.valueOf(i)),(rn.nextInt(10)*1000)));
+            productMap.put((1L+i),new Product((1L+i),("title"+String.valueOf(i)),(rn.nextInt(10)*1000)));
         }
     }
 
     @Override
-    public boolean newProductAdd(long id, String title, int cost) {
+    public boolean newProductAdd(Long id, String title, int cost) {
         if (!isId(id)) {
             productMap.put(id, (new Product(id, title, cost)));
             return true;
@@ -32,7 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public boolean add(long id, Product product) {
+    public boolean add(Long id, Product product) {
         if(!isId(id)){
             productMap.put(id,product);
             return true;
@@ -41,13 +41,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public boolean isId(long id) {
+    public boolean isId(Long id) {
         if(productMap.containsKey(id)) return true;
         return false;
     }
 
     @Override
-    public Optional<Product> findById(long id) {
+    public Optional<Product> findById(Long id) {
         if(isId(id)){
             return Optional.of(productMap.get(id));
         }
@@ -55,13 +55,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Map<Long, Product> getProducts() {
+    public HashMap<Long,Product> getProducts() {
         return productMap;
     }
 
 
     @Override
-    public boolean removeByID(long id) {
+    public boolean removeByID(Long id) {
         if(isId(id)){
             productMap.remove(id);
             return true;

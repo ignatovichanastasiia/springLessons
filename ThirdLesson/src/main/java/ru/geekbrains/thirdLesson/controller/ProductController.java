@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.service.ProductService;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
 @Controller
 @AllArgsConstructor
-//@RequestMapping("/")
 public class ProductController {
 
     private ProductService productService;
@@ -20,14 +20,13 @@ public class ProductController {
     @GetMapping("/products")
     @ResponseBody
     public String getProducts(Model model) {
-        Map getProducts = productService.getProducts();
+        HashMap getProducts = productService.getProducts();
         model.addAttribute("products", getProducts);
         return "products";
     }
 
     @GetMapping("/products/{id}")
-    @ResponseBody
-    public String getProductInfo(Model model, @PathVariable long id) {
+    public String getProductInfo(Model model, @PathVariable Long id) {
         if (productService.findById(id).isPresent()) {
             Product product = productService.findById(id).get();
             model.addAttribute("product", product);
@@ -41,22 +40,16 @@ public class ProductController {
         return "form_add";
     }
 
-    @GetMapping("exception")
+    @GetMapping("/exception")
     public String getExceptionPage(Model model) {
-//        model.addAttribute("someTestProd", new Product(1l,"Title",20000));
         return "exception";
     }
 
-    @PostMapping("/products/add_product")
+    @PostMapping("/add_product")
     public String addProduct(@ModelAttribute Product product, Model model) {
         if (productService.add(product.getId(), product)) {
             return "redirect:/products";
         }
         return "redirect:/exception";
     }
-
-//    @GetMapping("/test")
-//    public String test(){
-//        return "test";
-//    }
 }

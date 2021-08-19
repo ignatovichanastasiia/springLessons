@@ -2,19 +2,13 @@ package ru.geekbrains.thirdLesson.service.Impl;
 
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.util.Assert;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.repo.Impl.ProductRepositoryImpl;
-import ru.geekbrains.thirdLesson.repo.ProductRepository;
-import ru.geekbrains.thirdLesson.test_class.SpringMvcDemoApplicationTest;
+import ru.geekbrains.thirdLesson.SpringMvcDemoApplicationTest;
 
-import java.util.HashMap;
 import java.util.Map;
 
 class ProductServiceImplTest extends SpringMvcDemoApplicationTest {
@@ -59,11 +53,11 @@ class ProductServiceImplTest extends SpringMvcDemoApplicationTest {
         Assertions.assertTrue(productService.isId(1L));
     }
 
-    @Test
-    void findById() {
-        product2 = productService.findById(1L).get();
-        Assertions.assertEquals(product, product2);
-    }
+//    @Test
+//    void findById() {
+//        product2 = productService.findById(1L).get();
+//        Assertions.assertEquals(product, product2);
+//    }
 
     @Test
     void getProducts() {
