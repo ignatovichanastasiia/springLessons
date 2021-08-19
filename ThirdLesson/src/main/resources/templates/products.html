@@ -13,9 +13,9 @@
         <td th:text="Cost"></td>
     </tr>
     <tr th:each="p:${products}">
-    <td th: text="${p.id}"/>
-    <td th: text="${p.title}"/>
-    <td th: text="${p.cost}"/>
+    <td th: text="${map.get(p).id}"/>
+    <td th: text="${map.get(p).title}"/>
+    <td th: text="${map.get(p).cost}"/>
     </tr>
 </table>
 </body>

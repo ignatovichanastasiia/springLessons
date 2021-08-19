@@ -1,14 +1,12 @@
 package ru.geekbrains.thirdLesson.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.service.ProductService;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -26,12 +24,8 @@ public class ProductController {
     @GetMapping("/products")
     @ResponseBody
     public String getProducts(Model model) {
-        ArrayList list = new ArrayList();
         Map getProducts = productService.getProducts();
-        getProducts.values().stream().forEach(x -> {
-            list.add(x);
-        });
-        model.addAttribute("products", list);
+        model.addAttribute("products", getProducts);
         return "products";
     }
 
@@ -48,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/products/form")
     @ResponseBody
-    public String getProductInfo(Model model) {
+    public String getProductForm(Model model) {
         return "form_add";
     }
 
