@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 import ru.geekbrains.thirdLesson.component.HibernateSessionFacManager;
 import ru.geekbrains.thirdLesson.domein.Category;
 import ru.geekbrains.thirdLesson.domein.Product;
@@ -14,6 +15,7 @@ import ru.geekbrains.thirdLesson.repo.ProductRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Repository
 @AllArgsConstructor
 @Data
 public class ProductRepositoryImpl implements ProductRepository {

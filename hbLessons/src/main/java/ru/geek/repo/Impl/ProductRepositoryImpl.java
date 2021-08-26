@@ -21,7 +21,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         factory = new Configuration().configure("config/hibernate.cfg.xml").buildSessionFactory();
     }
 
-    private void shutDown() {
+    public void shutDown() {
         factory.close();
     }
 
