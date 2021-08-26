@@ -27,6 +27,14 @@ public class ProductController {
         return "products";
     }
 
+    @GetMapping("/product?category={categoryId}")
+    public String getProductsByCategory(Model model, @PathVariable Long categoryId) {
+        HashMap getProductsByCategory = productService.getProductsByCategory(categoryId);
+        ArrayList listProductsByCategory = new ArrayList(getProductsByCategory.values());
+        model.addAttribute("products", listProductsByCategory);
+        return "products";
+    }
+
     //работает
     @GetMapping("/products/{id}")
     public String getProductInfo(Model model, @PathVariable Long id) {
@@ -38,6 +46,7 @@ public class ProductController {
         return "redirect:/exception";
     }
 
+
     @GetMapping("/products/form")
     public String getProductForm(Model model) {
         return "form_add";
@@ -48,9 +57,10 @@ public class ProductController {
         return "exception";
     }
 
+    //TO DO all meth & TESTS!
     @PostMapping("/add_product")
     public String addProduct(@ModelAttribute Product product, Model model) {
-        if (productService.add(product.getId(), product)) {
+        if (productService.add(product)) {
             return "redirect:/products";
         }
         return "redirect:/exception";
