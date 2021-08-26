@@ -20,6 +20,7 @@ public class Main {
         System.out.println(product);
         repository.removeByID(1L);
         System.out.println(repository.getProduct());
+        repository.shutDown();
     }
 }
 
