@@ -1,78 +1,122 @@
 package ru.geekbrains.thirdLesson.repo.Impl;
 
-
 import lombok.Data;
-import org.springframework.stereotype.Repository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.repo.ProductRepository;
 
-import javax.annotation.PostConstruct;
+
 import java.util.*;
 
-@Repository
 @Data
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private HashMap<Long, Product> productMap;
+    public static SessionFactory factory;
 
-    @PostConstruct
-    private void init(){
-        Random rn = new Random();
-        productMap = new HashMap<>();
-        for(int i=0;i<6;i++){
-            productMap.put((1L+i),new Product((1L+i),("title"+String.valueOf(i+1)),(rn.nextInt(10)*1000)));
-        }
-        //продуктМэп создан, продукты есть.
-        System.out.println(productMap);
+    Product product;
+    HashMap map;
+
+    private static void init() {
+        factory = new Configuration().configure("config/hibernate.cfg.xml").buildSessionFactory();
+    }
+
+    public void shutDown() {
+        factory.close();
     }
 
     @Override
-    public boolean newProductAdd(Long id, String title, int cost) {
-        if (!isId(id)) {
-            productMap.put(id, (new Product(id, title, cost)));
-            return true;
+    public boolean newProductAdd(String title, int cost) {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            product = new Product(title, cost);
+            //TO DO if(isId)
+            session.save(product);
+            session.getTransaction().commit();
+        } finally {
+            System.out.println(product);
         }
-        return false;
+        return true;
     }
 
     @Override
-    public boolean add(Long id, Product product) {
-        if(!isId(id)){
-            productMap.put(id,product);
-            return true;
+    public boolean add(Product product) {
+        //TO DO if(isID)
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.save(product);
+            session.getTransaction().commit();
+        } finally {
+            System.out.println(product);
         }
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean isId(Long id) {
-        if(productMap.containsKey(id)) return true;
-        return false;
-    }
+//    @Override
+//    public boolean isId(Long id) {
+//        if(productMap.containsKey(id)) return true;
+//        return false;
+//    }
 
     @Override
     public Optional<Product> findById(Long id) {
-        if(isId(id)){
-            return Optional.of(productMap.get(id));
+        //TO DO if(isId)
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            product = session.get(Product.class, id);
+            session.getTransaction().commit();
+        } finally {
+            System.out.println(product);
         }
-        return Optional.empty();
+        return Optional.of(product);
     }
 
     @Override
-    public HashMap<Long,Product> getProducts() {
-        return productMap;
+    public HashMap<Long, Product> getProducts() {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            ArrayList<Product> list = new ArrayList(session.createQuery("select p from Product p ").getResultList());
+            session.getTransaction().commit();
+            list.stream().forEach(x -> map.put(x.getId(), x));
+        } finally {
+            System.out.println(map);
+        }
+        return map;
     }
 
 
     @Override
     public boolean removeByID(Long id) {
-        if(isId(id)){
-            productMap.remove(id);
-            return true;
+        //TO DO if(isId)
+        boolean isDeleted = false;
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            product = session.get(Product.class, id);
+            if (product != null) {
+                session.delete(product);
+                isDeleted = true;
+            }
+            session.getTransaction().commit();
         }
-        return false;
+        return isDeleted;
     }
 
+    public boolean productUpdate(Product newVersionProduct){
+        //TO DO if(isId)
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            product = session.get(Product.class, newVersionProduct.getId());
+            if(!product.getTitle().equals(newVersionProduct.getTitle())){
+                product.setTitle(newVersionProduct.getTitle());
+            }
+            if(product.getCost() != newVersionProduct.getCost()){
+                product.setCost(newVersionProduct.getCost());
+            }
+            session.getTransaction().commit();
+        } finally {
+            System.out.println(product);
+        }
+        return true;
+    }
 }
-
-

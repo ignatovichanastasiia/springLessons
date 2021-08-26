@@ -3,16 +3,15 @@ package ru.geekbrains.thirdLesson.service;
 import ru.geekbrains.thirdLesson.domein.Product;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
-public interface ProductService {
+public interface ProductRepository {
 
-    public boolean newProductAdd(Long id, String title, int cost);
+    public boolean newProductAdd(String title, int cost);
 
-    public boolean add(Long id, Product product);
+    public boolean add(Product product);
 
-    public boolean isId(Long id);
+//    public boolean isId(Long id);
 
     public Optional<Product> findById(Long id);
 
