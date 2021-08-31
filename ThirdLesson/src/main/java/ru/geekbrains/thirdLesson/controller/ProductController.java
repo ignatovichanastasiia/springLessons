@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.thirdLesson.domein.Product;
 import ru.geekbrains.thirdLesson.service.ProductService;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 
 @Controller
@@ -18,24 +15,20 @@ public class ProductController {
 
     private ProductService productService;
 
-    //работает
     @GetMapping("/products")
-    public String getProducts(Model model) {
-        HashMap getProducts = productService.getProducts();
-        ArrayList products = new ArrayList(productService.getProducts().values());
+    public String findAll(Model model) {
+        List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "products";
     }
 
-    @GetMapping("/product?category={categoryId}")
-    public String getProductsByCategory(Model model, @PathVariable Long categoryId) {
-        HashMap getProductsByCategory = productService.getProductsByCategory(categoryId);
-        ArrayList listProductsByCategory = new ArrayList(getProductsByCategory.values());
-        model.addAttribute("products", listProductsByCategory);
-        return "products";
+    @GetMapping("/products_by_cost")
+    public String findByCost(Model model, @RequestParam("maxCost") int maxCost, @RequestParam("minCost") int minCost){
+        List<Product> products = productService.findByCostLessThanEqualAndCostGreaterThanEqual(maxCost,minCost);
+        model.addAttribute("productsByCost", products);
+        return "products_by_cost";
     }
 
-    //работает
     @GetMapping("/products/{id}")
     public String getProductInfo(Model model, @PathVariable Long id) {
         if (productService.findById(id).isPresent()) {
@@ -45,7 +38,6 @@ public class ProductController {
         }
         return "redirect:/exception";
     }
-
 
     @GetMapping("/products/form")
     public String getProductForm(Model model) {
@@ -60,9 +52,7 @@ public class ProductController {
     //TO DO all meth & TESTS!
     @PostMapping("/add_product")
     public String addProduct(@ModelAttribute Product product, Model model) {
-        if (productService.add(product)) {
-            return "redirect:/products";
-        }
-        return "redirect:/exception";
+        productService.save(product);
+        return "redirect:/products";
     }
 }

@@ -14,4 +14,6 @@ public interface ProductService {
     public boolean removeByID(Long id);
 
     public Product save(Product product);
+
+    public List<Product> findByCostLessThanEqualAndCostGreaterThanEqual(int maxCost, int minCost);
 }

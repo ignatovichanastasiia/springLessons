@@ -1,0 +1,4 @@
+Раньше вопрос был в закрытом/ неправильно настроенном порту БД. Теперь:
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-09-01 00:17:24.343 ERROR 11668 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   :

@@ -24,7 +24,7 @@ public class Product {
     @JoinColumn(name = "category")
     private Category category;
 
-    public Product(String title, int cost) {
+    public Product(String title, int cost, Long category) {
         this.title = title;
         this.cost = cost;
     }

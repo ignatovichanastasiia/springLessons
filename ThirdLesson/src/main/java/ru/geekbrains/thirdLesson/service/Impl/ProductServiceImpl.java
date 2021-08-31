@@ -37,6 +37,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    @Override
+    public List<Product> findByCostLessThanEqualAndCostGreaterThanEqual(int maxCost, int minCost){
+        return productRepository.findByCostLessThanEqualAndCostGreaterThanEqual(maxCost,minCost);
+    }
+
 //    public HashMap getProductsByCategory(Long categoryID){
 //        return productRepository.getProductsByCategory(categoryID);
 //    }
