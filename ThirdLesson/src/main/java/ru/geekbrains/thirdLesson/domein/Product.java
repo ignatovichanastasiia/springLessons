@@ -1,5 +1,6 @@
 package ru.geekbrains.thirdLesson.domein;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "product")
 public class Product {
     @Id
@@ -21,13 +23,13 @@ public class Product {
     private int cost;
 
     @ManyToOne
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product(String title, int cost, Long category) {
-        this.title = title;
-        this.cost = cost;
-    }
+//    public Product(String title, int cost, Long category) {
+//        this.title = title;
+//        this.cost = cost;
+//    }
 }
 
 

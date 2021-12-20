@@ -1,6 +1,7 @@
 package ru.geekbrains.thirdLesson.domein;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "category")
 public class Category {
 
@@ -22,7 +24,7 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> productsInCategory;
 
-    public Category(Long id, String title) {
-        this.title = title;
-    }
+//    public Category(Long id, String title) {
+//        this.title = title;
+//    }
 }

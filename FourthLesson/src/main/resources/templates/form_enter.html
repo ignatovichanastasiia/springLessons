@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add_product_form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Введите ценовое ограничение для продуктов</h1>
+<form action="#" th:action="@{/products_by_cost}" method="get">
+    <p>Min_cost: <input type="int" th:name="minCost" /></p>
+    <p>Max_cost<input type="int" th:name="maxCost" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
